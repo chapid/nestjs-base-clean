@@ -1,15 +1,12 @@
-import { Injectable, Inject, ConflictException } from '@nestjs/common';
 import { AuthRepository } from '../../domain/repositories/auth.repository';
 import { HashService } from '../../domain/services/hash.service';
 import { AuthUser } from '../../domain/entities/auth-user.entity';
+import { UserAlreadyExistsException } from '../../domain/exceptions/auth.exceptions';
 import { v4 as uuidv4 } from 'uuid';
 
-@Injectable()
 export class RegisterUseCase {
   constructor(
-    @Inject('AuthRepository')
     private readonly authRepository: AuthRepository,
-    @Inject('HashService')
     private readonly hashService: HashService,
   ) {}
 
@@ -17,7 +14,7 @@ export class RegisterUseCase {
     // 1. Verificar que el usuario no existe
     const existingUser = await this.authRepository.findByEmail(email);
     if (existingUser) {
-      throw new ConflictException('El usuario ya existe');
+      throw new UserAlreadyExistsException(email);
     }
 
     // 2. Hashear la contraseña

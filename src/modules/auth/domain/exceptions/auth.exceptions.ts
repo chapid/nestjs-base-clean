@@ -12,6 +12,13 @@ export class UserNotFoundException extends Error {
   }
 }
 
+export class UserAlreadyExistsException extends Error {
+  constructor(email?: string) {
+    super(email ? `Usuario con email ${email} ya existe` : 'El usuario ya existe');
+    this.name = 'UserAlreadyExistsException';
+  }
+}
+
 export class InvalidTokenException extends Error {
   constructor(message = 'Token inválido') {
     super(message);

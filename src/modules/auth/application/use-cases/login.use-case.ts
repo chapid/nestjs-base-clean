@@ -1,18 +1,13 @@
-import { Injectable, Inject } from '@nestjs/common';
 import { AuthRepository } from '../../domain/repositories/auth.repository';
 import { TokenService } from '../../domain/services/token.service';
 import { HashService } from '../../domain/services/hash.service';
 import { JwtToken, JwtPayload } from '../../domain/entities/jwt-token.entity';
 import { InvalidCredentialsException, UserNotFoundException } from '../../domain/exceptions/auth.exceptions';
 
-@Injectable()
 export class LoginUseCase {
   constructor(
-    @Inject('AuthRepository')
     private readonly authRepository: AuthRepository,
-    @Inject('TokenService')
     private readonly tokenService: TokenService,
-    @Inject('HashService')
     private readonly hashService: HashService,
   ) {}
 

@@ -41,20 +41,39 @@ Este proyecto está estructurado siguiendo los principios de **Clean Architectur
 
 ```bash
 src/
- ├── domain/
- │    ├── entities/          
- │    ├── repositories/      
+ ├── modules/
+ │    ├── user/
+ │    │    ├── domain/
+ │    │    │    ├── entities/
+ │    │    │    ├── repositories/
+ │    │    │
+ │    │    ├── application/
+ │    │    │    ├── use-cases/
+ │    │    │
+ │    │    ├── infrastructure/
+ │    │    │    ├── database/
+ │    │    │    ├── repositories/
+ │    │    │
+ │    │    ├── presentation/
+ │    │    │    ├── controllers/
+ │    │    │    ├── dtos/
+ │    │    │
+ │    │    ├── user.module.ts
+ │    │
+ │    ├── auth/
+ │    │    ├── domain/
+ │    │    ├── application/
+ │    │    ├── infrastructure/
+ │    │    ├── presentation/
+ │    │    ├── auth.module.ts
  │
- ├── application/			
- │    ├── use-cases/		
- │
- ├── infrastructure/
- │    ├── database/
- │    ├── repositories/		
- │
- ├── presentation/ 			
- │    ├── controllers/
- │    ├── dtos/
+ ├── shared/
+ │    ├── domain/
+ │    ├── application/
+ │    ├── infrastructure/
+ │    ├── utils/
+ │    ├── decorators/
+ │    ├── guards/
  │
  ├── app.module.ts
 ```

@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, Get, UseGuards, UseFilters } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { LoginDto } from '../dtos/login.dto';
 import { RegisterDto } from '../dtos/register.dto';
@@ -8,9 +8,11 @@ import { RegisterUseCase } from '../../application/use-cases/register.use-case';
 import { Public } from '../decorators/public.decorator';
 import { GetUser } from '../decorators/get-user.decorator';
 import { JwtAuthGuard } from '../../infrastructure/guards/jwt-auth.guard';
+import { AuthExceptionFilter } from '../../infrastructure/filters/auth-exception.filter';
 
 @ApiTags('auth')
 @Controller('auth')
+@UseFilters(AuthExceptionFilter)
 export class AuthController {
   constructor(
     private readonly loginUseCase: LoginUseCase,

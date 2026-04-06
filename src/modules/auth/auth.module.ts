@@ -43,12 +43,7 @@ import { UserSchema } from '../users/infrastructure/database/user.schema';
   ],
   controllers: [AuthController],
   providers: [
-    // Use Cases
-    LoginUseCase,
-    RegisterUseCase,
-    ValidateTokenUseCase,
-    
-    // Domain Services
+    // Infrastructure Services - implementaciones concretas
     {
       provide: 'AuthRepository',
       useClass: AuthRepositoryImpl,
@@ -60,6 +55,31 @@ import { UserSchema } from '../users/infrastructure/database/user.schema';
     {
       provide: 'HashService',
       useClass: BcryptHashService,
+    },
+
+    // Use Cases - inyección manual para mantener independencia de framework
+    {
+      provide: LoginUseCase,
+      useFactory: (
+        authRepository: AuthRepository,
+        tokenService: TokenService,
+        hashService: HashService,
+      ) => new LoginUseCase(authRepository, tokenService, hashService),
+      inject: ['AuthRepository', 'TokenService', 'HashService'],
+    },
+    {
+      provide: RegisterUseCase,
+      useFactory: (
+        authRepository: AuthRepository,
+        hashService: HashService,
+      ) => new RegisterUseCase(authRepository, hashService),
+      inject: ['AuthRepository', 'HashService'],
+    },
+    {
+      provide: ValidateTokenUseCase,
+      useFactory: (authRepository: AuthRepository) => 
+        new ValidateTokenUseCase(authRepository),
+      inject: ['AuthRepository'],
     },
     
     // Infrastructure

@@ -1,12 +1,9 @@
-import { Injectable, Inject } from '@nestjs/common';
 import { AuthRepository } from '../../domain/repositories/auth.repository';
 import { AuthUser } from '../../domain/entities/auth-user.entity';
 import { UserNotFoundException } from '../../domain/exceptions/auth.exceptions';
 
-@Injectable()
 export class ValidateTokenUseCase {
   constructor(
-    @Inject('AuthRepository')
     private readonly authRepository: AuthRepository,
   ) {}
 
