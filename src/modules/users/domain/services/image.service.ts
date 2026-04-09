@@ -1,3 +1,3 @@
-export abstract class ImageService {
-  abstract getRandomAvatar(): Promise<string>;
+export interface ImageService {
+  getRandomAvatar(): Promise<string>;
 }

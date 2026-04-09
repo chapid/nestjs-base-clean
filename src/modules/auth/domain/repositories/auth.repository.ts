@@ -1,7 +1,7 @@
 import { AuthUser } from '../entities/auth-user.entity';
 
-export abstract class AuthRepository {
-  abstract findByEmail(email: string): Promise<AuthUser | null>;
-  abstract findById(id: string): Promise<AuthUser | null>;
-  abstract create(user: AuthUser): Promise<AuthUser>;
+export interface AuthRepository {
+  findByEmail(email: string): Promise<AuthUser | null>;
+  findById(id: string): Promise<AuthUser | null>;
+  create(user: AuthUser): Promise<AuthUser>;
 }

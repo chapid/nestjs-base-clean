@@ -1,7 +1,7 @@
-import { UserRepository } from '../../domain/repositories/user.repository';
+import type { UserRepository } from '../../domain/repositories/user.repository';
 import { User } from '../../domain/entities/user.entity';
 import { v4 as uuid } from 'uuid';
-import { ImageService } from 'src/modules/users/domain/services/image.service';
+import type { ImageService } from 'src/modules/users/domain/services/image.service';
 import { UserAlreadyExistsException } from '../../domain/exceptions/user.exceptions';
 import { Injectable, Inject } from '@nestjs/common';
 
